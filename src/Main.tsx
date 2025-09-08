@@ -17,6 +17,7 @@ import TextPadDrawer from "./TextPadDrawer";
 import { copyPaste, fetchPath } from "./app/transfer";
 import { useTransferQueue, useUploadEnqueue } from "./app/transferQueue";
 import ProgressDialog from "./ProgressDialog";
+import MiniProgressDialog from "./MiniProgressDialog";
 
 // Centered helper
 function Centered({ children }: { children: React.ReactNode }) {
@@ -273,12 +274,16 @@ function Main({
           navigator.share({ url: url.toString() });
         }}
       />
-      {/* Show upload progress at bottom right when uploading */}
-      {transferQueue.some((q) => ["pending", "in-progress"].includes(q.status)) && (
-        <Box sx={{ position: "fixed", bottom: 24, right: 24, zIndex: 9999 }}>
-          <ProgressDialog open={true} onClose={() => {}} />
-        </Box>
-      )}
+      {/* Show mini progress dialog at bottom left when uploading/downloading */}
+      <MiniProgressDialog />
+      {/* Main ProgressDialog can be opened via menus only */}
+      <ProgressDialog
+        open={false}
+        onClose={() => {}}
+        progress={0}
+        total={1}
+        message=""
+      />
     </>
   );
 }
