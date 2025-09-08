@@ -276,7 +276,7 @@ function Main({
       {/* Show upload progress at bottom right when uploading */}
       {transferQueue.some((q) => ["pending", "in-progress"].includes(q.status)) && (
         <Box sx={{ position: "fixed", bottom: 24, right: 24, zIndex: 9999 }}>
-          <ProgressDialog queue={transferQueue} />
+          <ProgressDialog open={true} onClose={() => {}} />
         </Box>
       )}
     </>
@@ -284,20 +284,3 @@ function Main({
 }
 
 export default Main;
-
-// In your serverless or custom server handler (e.g., api/index.ts or server.js):
-// Pseudocode for Node.js/Express or similar:
-
-// If request is for root ("/"), serve public/index.html
-// Otherwise, use the functions/[[path]].ts handler
-
-// Example Express.js logic:
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-// });
-// app.use('/webdav', require('./functions/[[path]]'));
-
-// For serverless (Vercel, Netlify, etc.), add a rewrite rule in vercel.json or netlify.toml
-// so that '/' serves public/index.html and only /webdav/* uses functions/[[path]].ts
-
-// No code change needed in Main.tsx for this routing logic.
