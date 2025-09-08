@@ -1,6 +1,6 @@
 {
-  "short_name": "Flare Drive",
-  "name": "Flare Drive",
+  "short_name": "Alimad CDN",
+  "name": "Alimad CDN",
   "icons": [
     {
       "src": "favicon.ico",
@@ -15,6 +15,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#00ff00",
+  "background_color": "#000000"
 }
