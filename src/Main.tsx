@@ -119,10 +119,29 @@ const theme = createTheme({
     background: {
       default: "#111",
       paper: "#222",
+      // Header background
+      appBar: "#000",
     },
     text: {
-      primary: "#00ff00",
-      secondary: "#00ff00",
+      primary: "#fff",
+      secondary: "#fff",
+    },
+  },
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#000",
+          color: "#fff",
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: "#fff",
+        },
+      },
     },
   },
 });
