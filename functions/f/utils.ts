@@ -4,7 +4,7 @@ export interface RequestHandlerParams {
   request: Request;
 }
 
-export const WEBDAV_ENDPOINT = "/webdav/";
+export const WEBDAV_ENDPOINT = "/f/";
 
 export const ROOT_OBJECT = {
   key: "",

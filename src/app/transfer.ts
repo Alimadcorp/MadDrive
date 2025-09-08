@@ -3,7 +3,7 @@ import pLimit from "p-limit";
 import { encodeKey, FileItem } from "../FileGrid";
 import { TransferTask } from "./transferQueue";
 
-const WEBDAV_ENDPOINT = "/webdav/";
+const WEBDAV_ENDPOINT = "/f/";
 
 export async function fetchPath(path: string) {
   const res = await fetch(`${WEBDAV_ENDPOINT}${encodeKey(path)}`, {
@@ -37,7 +37,7 @@ export async function fetchPath(path: string) {
         "thumbnail"
       )[0]?.textContent;
       return {
-        key: decodeURI(href).replace(/^\/webdav\//, ""),
+        key: decodeURI(href).replace(/^\/f\//, ""),
         size: size ? Number(size) : 0,
         uploaded: lastModified!,
         httpMetadata: { contentType: contentType! },
@@ -162,7 +162,7 @@ export async function multipartUpload(
   const headers = options?.headers || {};
   headers["content-type"] = file.type;
 
-  const uploadResponse = await fetch(`/webdav/${encodeKey(key)}?uploads`, {
+  const uploadResponse = await fetch(`/f/${encodeKey(key)}?uploads`, {
     headers,
     method: "POST",
   });
@@ -179,7 +179,7 @@ export async function multipartUpload(
         partNumber: i.toString(),
         uploadId,
       });
-      const uploadUrl = `/webdav/${encodeKey(key)}?${searchParams}`;
+      const uploadUrl = `/f/${encodeKey(key)}?${searchParams}`;
       if (i === limit.concurrency)
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -211,7 +211,7 @@ export async function multipartUpload(
   );
   const uploadedParts = await Promise.all(promises);
   const completeParams = new URLSearchParams({ uploadId });
-  const response = await fetch(`/webdav/${encodeKey(key)}?${completeParams}`, {
+  const response = await fetch(`/f/${encodeKey(key)}?${completeParams}`, {
     method: "POST",
     body: JSON.stringify({ parts: uploadedParts }),
   });
@@ -267,7 +267,7 @@ export async function processTransferTask({
       const thumbnailBlob = await generateThumbnail(file);
       const digestHex = await blobDigest(thumbnailBlob);
 
-      const thumbnailUploadUrl = `/webdav/_$flaredrive$/thumbnails/${digestHex}.png`;
+      const thumbnailUploadUrl = `/f/_$flaredrive$/thumbnails/${digestHex}.png`;
       try {
         await fetch(thumbnailUploadUrl, {
           method: "PUT",
