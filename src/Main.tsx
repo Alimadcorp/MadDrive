@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Home as HomeIcon, NoteAdd as NoteAddIcon } from "@mui/icons-material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import FileGrid, { encodeKey, FileItem, isDirectory } from "./FileGrid";
 import MultiSelectToolbar from "./MultiSelectToolbar";
@@ -109,6 +110,23 @@ function DropZone({
   );
 }
 
+// Theme configuration
+const theme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: { main: "#00ff00" },
+    secondary: { main: "#00ff00" },
+    background: {
+      default: "#111",
+      paper: "#222",
+    },
+    text: {
+      primary: "#00ff00",
+      secondary: "#00ff00",
+    },
+  },
+});
+
 // Main Component
 function Main({
   search,
@@ -178,7 +196,7 @@ function Main({
   }, []);
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       {cwd && <PathBreadcrumb path={cwd} onCwdChange={setCwd} />}
 
       {loading ? (
@@ -276,7 +294,7 @@ function Main({
       {/* Show mini progress dialog at bottom left when uploading/downloading */}
       <MiniProgressDialog />
       {/* Main ProgressDialog can be opened via menus only */}
-    </>
+    </ThemeProvider>
   );
 }
 
