@@ -22,30 +22,50 @@ export default function MiniProgressDialog() {
       left: 24,
       zIndex: 9999,
       minWidth: 220,
-      bgcolor: "background.paper",
+      bgcolor: "#222",
       boxShadow: 3,
       borderRadius: 2,
       p: 2,
       display: "flex",
       flexDirection: "column",
       gap: 1,
+      color: '#fff'
     }}>
-      {uploads.length > 0 && (
-        <Tooltip title={uploads.map(u => u.name).join(", ") || "Uploading..."}>
+      {uploads.map((u) => (
+        <Tooltip key={u.name} title={u.name}>
           <Box>
-            <Typography variant="body2">Uploading ({uploads.length})</Typography>
-            <LinearProgress variant="indeterminate" />
+            <Typography variant="body2" sx={{ color: '#fff' }}>
+              Uploading: {u.name}
+            </Typography>
+            <LinearProgress
+              variant="determinate"
+              value={u.total ? (u.loaded / u.total) * 100 : 0}
+              sx={{ bgcolor: '#333', '& .MuiLinearProgress-bar': { bgcolor: '#00ff00' } }}
+            />
+            <Typography variant="caption" sx={{ color: '#fff' }}>
+              {Math.round(u.loaded / 1024)} KB / {Math.round(u.total / 1024)} KB
+            </Typography>
           </Box>
         </Tooltip>
-      )}
-      {downloads.length > 0 && (
-        <Tooltip title={downloads.map(d => d.name).join(", ") || "Downloading..."}>
+      ))}
+      {downloads.map((d) => (
+        <Tooltip key={d.name} title={d.name}>
           <Box>
-            <Typography variant="body2">Downloading ({downloads.length})</Typography>
-            <LinearProgress variant="indeterminate" color="secondary" />
+            <Typography variant="body2" sx={{ color: '#fff' }}>
+              Downloading: {d.name}
+            </Typography>
+            <LinearProgress
+              variant="determinate"
+              value={d.total ? (d.loaded / d.total) * 100 : 0}
+              color="secondary"
+              sx={{ bgcolor: '#333', '& .MuiLinearProgress-bar': { bgcolor: '#00ff00' } }}
+            />
+            <Typography variant="caption" sx={{ color: '#fff' }}>
+              {Math.round(d.loaded / 1024)} KB / {Math.round(d.total / 1024)} KB
+            </Typography>
           </Box>
         </Tooltip>
-      )}
+      ))}
     </Box>
   );
 }
