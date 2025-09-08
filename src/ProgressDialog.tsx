@@ -38,42 +38,50 @@ function ProgressDialog({
 
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="xs">
-      <DialogTitle>Progress</DialogTitle>
+      <DialogTitle sx={{ bgcolor: "#222", color: "#fff" }}>Progress</DialogTitle>
       <Tabs
         value={tab}
         onChange={(_, newTab) => setTab(newTab)}
-        sx={{ "& .MuiTab-root": { flexBasis: "50%" } }}
+        sx={{
+          bgcolor: "#222",
+          color: "#fff",
+          "& .MuiTab-root": { flexBasis: "50%", color: "#fff" },
+          "& .Mui-selected": { color: "#00ff00" },
+        }}
       >
         <Tab label="Downloads" />
         <Tab label="Uploads" />
       </Tabs>
       {tasks.length === 0 ? (
-        <DialogContent>
-          <Typography textAlign="center" color="text.secondary">
+        <DialogContent sx={{ bgcolor: "#222" }}>
+          <Typography textAlign="center" sx={{ color: "#fff" }}>
             No tasks
           </Typography>
         </DialogContent>
       ) : (
-        <DialogContent sx={{ padding: 0 }}>
+        <DialogContent sx={{ padding: 0, bgcolor: "#222" }}>
           <List>
             {tasks.map((task) => (
-              <ListItem key={task.name}>
+              <ListItem key={task.name} sx={{ bgcolor: "#222", color: "#fff" }}>
                 <ListItemText
                   primary={task.name}
+                  primaryTypographyProps={{ color: "#fff" }}
                   secondary={`${humanReadableSize(
                     task.loaded
                   )} / ${humanReadableSize(task.total)}`}
+                  secondaryTypographyProps={{ color: "#fff" }}
                 />
                 {task.status === "failed" ? (
                   <Tooltip title={task.error.message}>
                     <ErrorOutlineIcon color="error" />
                   </Tooltip>
                 ) : task.status === "completed" ? (
-                  <CheckCircleOutlineIcon color="success" />
+                  <CheckCircleOutlineIcon sx={{ color: "#00ff00" }} />
                 ) : task.status === "in-progress" ? (
                   <CircularProgress
                     variant="determinate"
                     size={24}
+                    sx={{ color: "#00ff00" }}
                     value={(task.loaded / task.total) * 100}
                   />
                 ) : null}
