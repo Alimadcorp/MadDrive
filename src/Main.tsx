@@ -28,6 +28,8 @@ function Centered({ children }: { children: React.ReactNode }) {
         justifyContent: "center",
         alignItems: "center",
         height: "100%",
+        bgcolor: '#222',
+        color: '#fff'
       }}
     >
       {children}
@@ -46,13 +48,13 @@ function PathBreadcrumb({
   const parts = path.replace(/\/$/, "").split("/");
 
   return (
-    <Breadcrumbs separator="›" sx={{ padding: 1 }}>
-      <Button onClick={() => onCwdChange("")} sx={{ minWidth: 0, padding: 0 }}>
-        <HomeIcon />
+    <Breadcrumbs separator="›" sx={{ padding: 1, bgcolor: '#222', color: '#fff', borderRadius: 2 }}>
+      <Button onClick={() => onCwdChange("")} sx={{ minWidth: 0, padding: 0, color: '#fff' }}>
+        <HomeIcon sx={{ color: '#00ff00' }} />
       </Button>
       {parts.map((part, index) =>
         index === parts.length - 1 ? (
-          <Typography key={index} color="text.primary">
+          <Typography key={index} color="#fff">
             {part}
           </Typography>
         ) : (
@@ -62,6 +64,7 @@ function PathBreadcrumb({
             onClick={() => {
               onCwdChange(parts.slice(0, index + 1).join("/") + "/");
             }}
+            sx={{ color: '#fff' }}
           >
             {part}
           </Link>
@@ -219,7 +222,7 @@ function Main({
 
       {loading ? (
         <Centered>
-          <CircularProgress />
+            <CircularProgress/>
         </Centered>
       ) : (
         <DropZone
