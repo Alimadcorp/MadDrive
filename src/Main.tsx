@@ -16,7 +16,6 @@ import UploadDrawer, { UploadFab } from "./UploadDrawer";
 import TextPadDrawer from "./TextPadDrawer";
 import { copyPaste, fetchPath } from "./app/transfer";
 import { useTransferQueue, useUploadEnqueue } from "./app/transferQueue";
-import ProgressDialog from "./ProgressDialog";
 import MiniProgressDialog from "./MiniProgressDialog";
 
 // Centered helper
@@ -277,13 +276,6 @@ function Main({
       {/* Show mini progress dialog at bottom left when uploading/downloading */}
       <MiniProgressDialog />
       {/* Main ProgressDialog can be opened via menus only */}
-      <ProgressDialog
-        open={false}
-        onClose={() => {}}
-        progress={0}
-        total={1}
-        message=""
-      />
     </>
   );
 }
