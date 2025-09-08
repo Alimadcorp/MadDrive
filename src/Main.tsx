@@ -119,8 +119,7 @@ const theme = createTheme({
     background: {
       default: "#111",
       paper: "#222",
-      // Header background
-      appBar: "#000",
+      // Header background removed, use MuiAppBar styleOverrides below
     },
     text: {
       primary: "#fff",
@@ -235,7 +234,7 @@ function Main({
             onCwdChange={(newCwd: string) => setCwd(newCwd)}
             multiSelected={multiSelected}
             onMultiSelect={handleMultiSelect}
-            emptyMessage={<Centered>No files or folders</Centered>}
+            emptyMessage={<Centered><span style={{color: '#fff'}}>No files or folders</span></Centered>}
           />
         </DropZone>
       )}

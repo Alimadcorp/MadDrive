@@ -14,7 +14,7 @@ function Header({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   return (
-    <Toolbar disableGutters sx={{ padding: 1 }}>
+    <Toolbar disableGutters sx={{ padding: 1, bgcolor: "#000", color: "#fff" }}>
       <InputBase
         size="small"
         fullWidth
@@ -22,7 +22,8 @@ function Header({
         value={search}
         onChange={(e) => onSearchChange(e.target.value)}
         sx={{
-          backgroundColor: "whitesmoke",
+          backgroundColor: "#222",
+          color: "#fff",
           borderRadius: "999px",
           padding: "8px 16px",
         }}
@@ -39,10 +40,12 @@ function Header({
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={() => setAnchorEl(null)}
+        MenuListProps={{ sx: { bgcolor: "#222", color: "#fff" } }}
       >
-        <MenuItem>View as</MenuItem>
-        <MenuItem>Sort by</MenuItem>
+        <MenuItem sx={{ bgcolor: "#222", color: "#fff" }}>View as</MenuItem>
+        <MenuItem sx={{ bgcolor: "#222", color: "#fff" }}>Sort by</MenuItem>
         <MenuItem
+          sx={{ bgcolor: "#222", color: "#fff" }}
           onClick={() => {
             setAnchorEl(null);
             setShowProgressDialog(true);

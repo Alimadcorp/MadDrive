@@ -45,7 +45,7 @@ function FileGrid({
   return files.length === 0 ? (
     emptyMessage
   ) : (
-    <Grid container sx={{ paddingBottom: "48px" }}>
+    <Grid container sx={{ paddingBottom: "48px", bgcolor: "#111", color: "#fff" }}>
       {files.map((file) => (
         <Grid item key={file.key} xs={12} sm={6} md={4} lg={3} xl={2}>
           <ListItemButton
@@ -66,7 +66,7 @@ function FileGrid({
               e.preventDefault();
               onMultiSelect(file.key);
             }}
-            sx={{ userSelect: "none" }}
+            sx={{ userSelect: "none", bgcolor: "#222", color: "#fff" }}
           >
             <ListItemIcon>
               {file.customMetadata?.thumbnail ? (
@@ -85,6 +85,7 @@ function FileGrid({
                 whiteSpace: "nowrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
+                color: "#fff"
               }}
               secondary={
                 <React.Fragment>
@@ -93,6 +94,7 @@ function FileGrid({
                       display: "inline-block",
                       minWidth: "160px",
                       marginRight: 1,
+                      color: "#fff"
                     }}
                   >
                     {new Date(file.uploaded).toLocaleString()}
