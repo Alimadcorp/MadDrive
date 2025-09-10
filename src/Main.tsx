@@ -163,6 +163,7 @@ function Main({
   const [showUploadDrawer, setShowUploadDrawer] = useState(false);
   const [showTextPadDrawer, setShowTextPadDrawer] = useState(false);
   const [lastUploadKey, setLastUploadKey] = useState<string | null>(null);
+  const [auth, setAuth] = useState<string | null>(null);
   const [showLogin, setShowLogin] = useState(false);
 
   const transferQueue = useTransferQueue();
@@ -221,6 +222,7 @@ function Main({
     if ((window as any).WEBDAV_UNLISTED === "1" && !(window as any).WEBDAV_AUTH) {
       setShowLogin(true);
     } else if ((window as any).WEBDAV_AUTH) {
+      setAuth((window as any).WEBDAV_AUTH);
       setShowLogin(false);
     }
   }, []);
@@ -231,6 +233,7 @@ function Main({
     if (!username || !password) return;
     const encoded = btoa(`${username}:${password}`);
     const authHeader = `Basic ${encoded}`;
+    setAuth(authHeader);
     (window as any).WEBDAV_AUTH = authHeader;
     setShowLogin(false);
   };
