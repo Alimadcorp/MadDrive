@@ -218,19 +218,11 @@ function Main({
   }, []);
 
   useEffect(() => {
-    // Always check auth on mount and on changes to window.WEBDAV_AUTH
-    const checkAuth = () => {
-      if ((window as any).WEBDAV_UNLISTED === "1" && !(window as any).WEBDAV_AUTH) {
-        setShowLogin(true);
-      } else {
-        setShowLogin(false);
-      }
-    };
-    checkAuth();
-    window.addEventListener("WEBDAV_AUTH_CHANGE", checkAuth);
-    return () => {
-      window.removeEventListener("WEBDAV_AUTH_CHANGE", checkAuth);
-    };
+    if ((window as any).WEBDAV_UNLISTED === "1" && !(window as any).WEBDAV_AUTH) {
+      setShowLogin(true);
+    } else if ((window as any).WEBDAV_AUTH) {
+      setShowLogin(false);
+    }
   }, []);
 
   const handleLogin = () => {
@@ -241,8 +233,6 @@ function Main({
     const authHeader = `Basic ${encoded}`;
     (window as any).WEBDAV_AUTH = authHeader;
     setShowLogin(false);
-    // Dispatch a custom event so other listeners can react
-    window.dispatchEvent(new Event("WEBDAV_AUTH_CHANGE"));
   };
 
   if (showLogin) {
