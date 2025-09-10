@@ -123,9 +123,28 @@ function Main({
   const [showUploadDrawer, setShowUploadDrawer] = useState(false);
   const [showTextPadDrawer, setShowTextPadDrawer] = useState(false);
   const [lastUploadKey, setLastUploadKey] = useState<string | null>(null);
+  const [auth, setAuth] = useState<string | null>(null);
+  const [showLogin, setShowLogin] = useState(false);
 
-  const transferQueue = useTransferQueue();
-  const uploadEnqueue = useUploadEnqueue();
+  useEffect(() => {
+    if ((window as any).WEBDAV_UNLISTED === "1" && !(window as any).WEBDAV_AUTH) {
+      setShowLogin(true);
+    } else if ((window as any).WEBDAV_AUTH) {
+      setAuth((window as any).WEBDAV_AUTH);
+      setShowLogin(false);
+    }
+  }, []);
+
+  const handleLogin = () => {
+    const username = window.prompt("Username:");
+    const password = window.prompt("Password:");
+    if (!username || !password) return;
+    const encoded = btoa(`${username}:${password}`);
+    const authHeader = `Basic ${encoded}`;
+    setAuth(authHeader);
+    (window as any).WEBDAV_AUTH = authHeader;
+    setShowLogin(false);
+  };
 
   const fetchFiles = useCallback(() => {
     fetchPath(cwd)
@@ -175,6 +194,16 @@ function Main({
       return [...prev, key];
     });
   }, []);
+
+  if (showLogin) {
+    return (
+      <Centered>
+        <Button variant="contained" onClick={handleLogin}>
+          Login to FlareDrive
+        </Button>
+      </Centered>
+    );
+  }
 
   return (
     <>
