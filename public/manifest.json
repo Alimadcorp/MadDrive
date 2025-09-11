@@ -1,6 +1,6 @@
 {
-  "short_name": "Alimad CDN",
-  "name": "Alimad CDN",
+  "short_name": "Alvina CDN",
+  "name": "Alvina CDN",
   "icons": [
     {
       "src": "favicon.ico",
@@ -15,6 +15,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#00ff00",
+  "theme_color": "#FF69B4",
   "background_color": "#000000"
 }
