@@ -1,6 +1,6 @@
 {
-  "short_name": "Alimad CDN",
-  "name": "Alimad CDN",
+  "short_name": "Art3mis CDN",
+  "name": "Art3mis CDN",
   "icons": [
     {
       "src": "favicon.ico",
@@ -15,6 +15,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#00ff00",
+  "theme_color": "#70e0ff",
   "background_color": "#000000"
 }
