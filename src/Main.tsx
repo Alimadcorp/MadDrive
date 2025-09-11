@@ -50,7 +50,7 @@ function PathBreadcrumb({
   return (
     <Breadcrumbs separator="›" sx={{ padding: 1, bgcolor: '#222', color: '#fff' }}>
       <Button onClick={() => onCwdChange("")} sx={{ minWidth: 0, padding: 0, color: '#fff' }}>
-        <HomeIcon sx={{ color: '#00ff00' }} />
+        <HomeIcon sx={{ color: '#1e90ff' }} />
       </Button>
       {parts.map((part, index) =>
         index === parts.length - 1 ? (
@@ -117,7 +117,7 @@ function DropZone({
 const theme = createTheme({
   palette: {
     mode: "dark",
-    primary: { main: "#00ff00" },
+    primary: { main: "#1e90ff" },
     secondary: { main: "#33ff33ff" },
     background: {
       default: "#222",
