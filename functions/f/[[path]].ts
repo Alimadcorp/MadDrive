@@ -12,7 +12,12 @@ import { handleRequestPost } from "./post";
 
 async function handleRequestOptions() {
   return new Response(null, {
-    headers: { Allow: Object.keys(HANDLERS).join(", ") },
+    headers: {
+      Allow: Object.keys(HANDLERS).join(", "),
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "HEAD, OPTIONS",
+      "Access-Control-Allow-Headers": "*",
+    },
   });
 }
 
